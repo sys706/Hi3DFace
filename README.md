@@ -9,6 +9,7 @@ Tensorflow implementation for the paper Hi3DFace: High-realistic 3D Face Reconst
 - Linux + Anaconda
 - CUDA 10.0 + CUDNN 7.6.0
 - Python 3.7
+- Tensorflow 1.15.0
 - [tf_mesh_renderer](https://github.com/google/tf_mesh_renderer)
 
 ## Installation
@@ -22,7 +23,7 @@ cd Hi3DFace
 If you use anaconda, run the following:
 ```bash
 conda create -n hi3dface python=3.7
-source activate hi3dface
+conda activate hi3dface
 pip install -r requirements.txt
 ```
 
@@ -44,7 +45,29 @@ g++ -std=c++11 \
     -o ./tools/kernels/rasterize_triangles_kernel.so -fPIC -D_GLIBCXX_USE_CXX11_ABI=0 \
     -I$TF_INC -L$TF_LIB -ltensorflow_framework -O
 ```
-Note that find the correct path to **TF_INC** and **TF_LIB**. If it does not work, please try to find them manually. You can also compile the codes using methods provided by [**tf_mesh_renderer**]().
+Note that find the correct path to **TF_INC** and **TF_LIB**. If it does not work, please try to find them manually. You can also compile the codes using the approach provided by [**tf_mesh_renderer**]().
+
+## Run de-occlusion model
+- Download **[vgg16.npy](https://drive.google.com/file/d/1aJuYcsRbz3XssHpIa8zBTHbru8IvsxVH/view?usp=drive_link)** and put it under ```DeOcclusion/vgg```.
+- Download the pre-trained models: [eyeglass](https://drive.google.com/file/d/1w7pz5FHZN8_G5QJxkzN96wn-55P476cY/view?usp=sharing) | [hand](https://drive.google.com/file/d/1eiEyzsNkv-TsSFBCUTpG27gbe-hJeuvl/view?usp=sharing) | [hat](https://drive.google.com/file/d/13Vfk15yHsnRdQav6kyvroka3sEhkV0Xx/view?usp=sharing) | [microphone](https://drive.google.com/file/d/1HPKtB2X4R7xiSc3Z9y759-wjYb1XKQpX/view?usp=sharing), unzip and put them under the directory ```checkpoints\DeOcclusion```
+- Test the eyeglass model, run the following:
+```bash
+python test.py --output '../results/de_occlusion' --test_data_path '../inputs/eyeglass.png' --mask_path '../inputs/eyeglass_mask.png' --model_path '../checkpoints/DeOcclusion/eyeglass/eyeglass'
+```
+- Test the hand model, run the following:
+```bash
+python test.py --output '../results/de_occlusion' --test_data_path '../inputs/hand.png' --mask_path '../inputs/hand_mask.png' --model_path '../checkpoints/DeOcclusion/hand/hand'
+```
+- Test the hat model, run the following:
+```bash
+python test.py --output '../results/de_occlusion' --test_data_path '../inputs/hat.png' --mask_path '../inputs/hat_mask.png' --model_path '../checkpoints/DeOcclusion/hat/hat'
+```
+- Test the microphone model, run the following:
+```bash
+python test.py --output '../results/de_occlusion' --test_data_path '../inputs/micro.png' --mask_path '../inputs/micro_mask.png' --model_path '../checkpoints/DeOcclusion/micro/micro'
+```
+
+
 
 
 
