@@ -1,5 +1,5 @@
 # Hi3DFace
-Tensorflow implementation for the paper Hi3DFace: High-realistic 3D Face Reconstruction from a Single Occluded Image
+Tensorflow implementation for the paper "Hi3DFace: High-realistic 3D Face Reconstruction from a Single Occluded Image"
 
 <p>
 <img src="figures/framework.png" alt="framework" width="875px">
@@ -71,7 +71,7 @@ python test.py --output '../results/de_occlusion' --test_data_path '../inputs/mi
 
 Reconstructing smooth, medium-scale and fine-scale faces from the above de-occluded images,  respectively.
 - Download **[resources.zip](https://drive.google.com/file/d/1gkG6rw9zu9vxfkuUo26Pczc2v2SyoEvH/view?usp=sharing)**, unzip and put it under the directory ```resources/```.
-- Download the pre-trained coarse model **[coarse-model.zip]()**, medium model **[medium-model.zip]()**, and fine model **[fine-model.zip]()**, unzip and put them under the directory ```checkpoints/Reconstruction```.
+- Download the pre-trained coarse model **[coarse-model.zip](https://drive.google.com/file/d/1BSlA_F7BdH1PQ3ATlJFd7_bKEiYUKBJ-/view?usp=sharing)**, medium model **[medium-model.zip](https://drive.google.com/file/d/1KiBGxVo_oww8ayJXl38f1-Q7gv5RlHmi/view?usp=sharing)**, and fine model **[fine-model.zip](https://drive.google.com/file/d/1h9nnOph6wCOY80ApJNWYGOGucbiNhIJw/view?usp=sharing)**, unzip and put them under the directory ```checkpoints/Reconstruction```.
 - Reconstruct smooth faces, run the following:
 ```bash
 ./run_test_coarse.sh
