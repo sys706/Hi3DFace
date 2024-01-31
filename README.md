@@ -13,13 +13,13 @@ Tensorflow implementation for the paper Hi3DFace: High-realistic 3D Face Reconst
 - [tf_mesh_renderer](https://github.com/google/tf_mesh_renderer)
 
 ## Installation
-### 1. Clone the repository
+### ● Clone the repository
 ```bash
 git clone https://github.com/sys706/Hi3DFace.git
 cd Hi3DFace
 ```
 
-### 2. Set up the environment
+### ● Set up the environment
 If you use anaconda, run the following:
 ```bash
 conda create -n hi3dface python=3.7
@@ -27,7 +27,7 @@ conda activate hi3dface
 pip install -r requirements.txt
 ```
 
-### 3. Compile tf_mesh_renderer
+### ● Compile tf_mesh_renderer
 ```bash
 TF_INC=./env/lib/python3.7/site-packages/tensorflow_core/include
 TF_LIB=./env/lib/python3.7/site-packages/tensorflow_core
@@ -49,7 +49,7 @@ Note that find the correct path to **TF_INC** and **TF_LIB**. If it does not wor
 
 ## Run de-occlusion model
 - Download **[vgg16.npy](https://drive.google.com/file/d/1aJuYcsRbz3XssHpIa8zBTHbru8IvsxVH/view?usp=drive_link)** and put it under ```DeOcclusion/vgg```.
-- Download the pre-trained models: [eyeglass](https://drive.google.com/file/d/1w7pz5FHZN8_G5QJxkzN96wn-55P476cY/view?usp=sharing) | [hand](https://drive.google.com/file/d/1eiEyzsNkv-TsSFBCUTpG27gbe-hJeuvl/view?usp=sharing) | [hat](https://drive.google.com/file/d/13Vfk15yHsnRdQav6kyvroka3sEhkV0Xx/view?usp=sharing) | [microphone](https://drive.google.com/file/d/1HPKtB2X4R7xiSc3Z9y759-wjYb1XKQpX/view?usp=sharing), unzip and put them under the directory ```checkpoints\DeOcclusion```
+- Download the pre-trained models: **[eyeglass](https://drive.google.com/file/d/1w7pz5FHZN8_G5QJxkzN96wn-55P476cY/view?usp=sharing)** | **[hand](https://drive.google.com/file/d/1eiEyzsNkv-TsSFBCUTpG27gbe-hJeuvl/view?usp=sharing)** | **[hat](https://drive.google.com/file/d/13Vfk15yHsnRdQav6kyvroka3sEhkV0Xx/view?usp=sharing)** | **[microphone](https://drive.google.com/file/d/1HPKtB2X4R7xiSc3Z9y759-wjYb1XKQpX/view?usp=sharing)**, unzip and put them under the directory ```checkpoints\DeOcclusion```.
 - Test the eyeglass model, run the following:
 ```bash
 python test.py --output '../results/de_occlusion' --test_data_path '../inputs/eyeglass.png' --mask_path '../inputs/eyeglass_mask.png' --model_path '../checkpoints/DeOcclusion/eyeglass/eyeglass'
@@ -67,7 +67,23 @@ python test.py --output '../results/de_occlusion' --test_data_path '../inputs/ha
 python test.py --output '../results/de_occlusion' --test_data_path '../inputs/micro.png' --mask_path '../inputs/micro_mask.png' --model_path '../checkpoints/DeOcclusion/micro/micro'
 ```
 
+## Run face reconstruction model from the above de-occluded images
 
+Reconstructing smooth, medium-scale and fine-scale faces from the above de-occluded images,  respectively.
+- Download **[resources.zip](https://drive.google.com/file/d/1gkG6rw9zu9vxfkuUo26Pczc2v2SyoEvH/view?usp=sharing)**, unzip and put it under the directory ```resources/```.
+- Download the pre-trained coarse model **[coarse-model.zip]()**, medium model **[medium-model.zip]()**, and fine model **[fine-model.zip]()**, unzip and put them under the directory ```checkpoints/Reconstruction```.
+- Reconstruct smooth faces, run the following:
+```bash
+./run_test_coarse.sh
+```
+- Reconstruct medium-scale faces with detailed wrinkles, run the following:
+```bash
+./run_test_medium.sh
+```
+- Reconstruct fine-scale faces with high-fidelity textures that are close to the input images, run the following:
+```bash
+./run_test_fine.sh
+```
 
 
 
