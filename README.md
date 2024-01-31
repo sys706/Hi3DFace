@@ -52,6 +52,7 @@ Note that find the correct path to **TF_INC** and **TF_LIB**. If it does not wor
 - Download the pre-trained models: **[eyeglass](https://drive.google.com/file/d/1w7pz5FHZN8_G5QJxkzN96wn-55P476cY/view?usp=sharing)** | **[hand](https://drive.google.com/file/d/1eiEyzsNkv-TsSFBCUTpG27gbe-hJeuvl/view?usp=sharing)** | **[hat](https://drive.google.com/file/d/13Vfk15yHsnRdQav6kyvroka3sEhkV0Xx/view?usp=sharing)** | **[microphone](https://drive.google.com/file/d/1HPKtB2X4R7xiSc3Z9y759-wjYb1XKQpX/view?usp=sharing)**, unzip and put them under the directory ```checkpoints/DeOcclusion```.
 - Test the eyeglass model, run the following:
 ```bash
+cd DeOcclusion
 python test.py --output '../results/de_occlusion' --test_data_path '../inputs/eyeglass.png' --mask_path '../inputs/eyeglass_mask.png' --model_path '../checkpoints/DeOcclusion/eyeglass/eyeglass'
 ```
 - Test the hand model, run the following:
