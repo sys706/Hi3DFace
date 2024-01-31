@@ -4,3 +4,47 @@ Tensorflow implementation for the paper Hi3DFace: High-realistic 3D Face Reconst
 <p>
 <img src="figures/framework.png" alt="framework" width="875px">
 </p>
+
+## Requirements
+- Linux + Anaconda
+- CUDA 10.0 + CUDNN 7.6.0
+- Python 3.7
+- [tf_mesh_renderer](https://github.com/google/tf_mesh_renderer)
+
+## Installation
+### 1. Clone the repository
+```bash
+git clone https://github.com/sys706/Hi3DFace.git
+cd Hi3DFace
+```
+
+### 2. Set up the environment
+If you use anaconda, run the following:
+```bash
+conda create -n hi3dface python=3.7
+source activate hi3dface
+pip install -r requirements.txt
+```
+
+### 3. Compile tf_mesh_renderer
+```bash
+TF_INC=./env/lib/python3.7/site-packages/tensorflow_core/include
+TF_LIB=./env/lib/python3.7/site-packages/tensorflow_core
+```
+you might need the following to successfully compile the third-party library
+```bash
+ln -s ./env/lib/python3.7/site-packages/tensorflow_core/libtensorflow_framework.so.1 ./env/lib/python3.7/site-packages/tensorflow_core/libtensorflow_framework.so
+```
+
+compiles the c++ kernel of the differentiable renderer.
+```bash
+mkdir ./tools/kernels
+g++ -std=c++11 \
+    -shared ./tools/src_mesh_renderer/rasterize_triangles_grad.cc ./tools/src_mesh_renderer/rasterize_triangles_op.cc ./tools/src_mesh_renderer/rasterize_triangles_impl.cc ./tools/src_mesh_renderer/rasterize_triangles_impl.h \
+    -o ./tools/kernels/rasterize_triangles_kernel.so -fPIC -D_GLIBCXX_USE_CXX11_ABI=0 \
+    -I$TF_INC -L$TF_LIB -ltensorflow_framework -O
+```
+Note that find the correct path to **TF_INC** and **TF_LIB**. If it does not work, please try to find them manually. You can also compile the codes using methods provided by [**tf_mesh_renderer**]().
+
+
+
