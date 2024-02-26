@@ -28,24 +28,7 @@ pip install -r requirements.txt
 ```
 
 ### ● Compile tf_mesh_renderer
-```bash
-TF_INC=./env/lib/python3.7/site-packages/tensorflow_core/include
-TF_LIB=./env/lib/python3.7/site-packages/tensorflow_core
-```
-you might need the following to successfully compile the third-party library
-```bash
-ln -s ./env/lib/python3.7/site-packages/tensorflow_core/libtensorflow_framework.so.1 ./env/lib/python3.7/site-packages/tensorflow_core/libtensorflow_framework.so
-```
-
-compiles the c++ kernel of the differentiable renderer.
-```bash
-mkdir ./tools/kernels
-g++ -std=c++11 \
-    -shared ./tools/src_mesh_renderer/rasterize_triangles_grad.cc ./tools/src_mesh_renderer/rasterize_triangles_op.cc ./tools/src_mesh_renderer/rasterize_triangles_impl.cc ./tools/src_mesh_renderer/rasterize_triangles_impl.h \
-    -o ./tools/kernels/rasterize_triangles_kernel.so -fPIC -D_GLIBCXX_USE_CXX11_ABI=0 \
-    -I$TF_INC -L$TF_LIB -ltensorflow_framework -O
-```
-Note that find the correct path to **TF_INC** and **TF_LIB**. If it does not work, please try to find them manually. You can also compile the codes using the approach provided by [**tf_mesh_renderer**]().
+You can compile the codes using the approach provided by [**tf_mesh_renderer**](https://github.com/google/tf_mesh_renderer).
 
 ## Run de-occlusion model
 - Download **[vgg16.npy](https://drive.google.com/file/d/1aJuYcsRbz3XssHpIa8zBTHbru8IvsxVH/view?usp=drive_link)** and put it under ```DeOcclusion/vgg```.
