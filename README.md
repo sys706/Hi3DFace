@@ -28,7 +28,7 @@ pip install -r requirements.txt
 ```
 
 ### ● Compile tf_mesh_renderer
-You can compile the codes using the approach provided by [**tf_mesh_renderer**](https://github.com/google/tf_mesh_renderer).
+You can compile the differentiable renderer using the approach provided by [**tf_mesh_renderer**](https://github.com/google/tf_mesh_renderer).
 
 ## Run de-occlusion model
 - Download **[vgg16.npy](https://drive.google.com/file/d/1aJuYcsRbz3XssHpIa8zBTHbru8IvsxVH/view?usp=drive_link)** and put it under ```DeOcclusion/vgg```.
